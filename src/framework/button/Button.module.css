@@ -1,0 +1,32 @@
+.root {
+  padding: 8px 8px;
+  border: 1px solid var(--blue);
+  border-radius: 2px;
+  font-weight: bolder;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.primary {
+  background: var(--blue);
+  color: var(--dark-blue);
+}
+
+.primary:hover {
+  background: var(--dark-blue);
+  color: var(--blue);
+}
+
+.secondary {
+  background: var(--dark-blue);
+  color: var(--blue);
+}
+
+.secondary:hover {
+  filter: brightness(90%);
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

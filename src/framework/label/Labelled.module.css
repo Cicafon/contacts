@@ -1,0 +1,17 @@
+.root {
+    display: block;
+}
+
+.wrapper {
+    margin: 1rem 0;
+}
+
+.label {
+    display: block;
+    font-size: 0.8em;
+    margin-bottom: 0.4rem;
+}
+
+.bold {
+    font-weight: bolder;
+}

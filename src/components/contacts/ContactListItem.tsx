@@ -6,9 +6,9 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../framework/button/Button";
 
 interface Props {
-  picture: string;
+  picture: string | undefined;
   name: string;
-  phoneNumber: string;
+  phoneNumber: string | undefined;
   email: string;
   showDetails: () => void;
 }

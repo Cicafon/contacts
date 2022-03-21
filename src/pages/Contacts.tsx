@@ -1,35 +1,31 @@
+import { useContext, useEffect } from "react";
+import useHttp from "../axios/use-http";
 import ContactsList from "../components/contacts/ContactsList";
 import { Contact } from "../models";
+import ContactsContext from "../store/ContactsContext";
 
 const Contacts = () => {
-  const DUMMY_DATA: Contact[] = [
-    {
-      id: "1",
-      firstName: "Matya",
-      lastName: "Szobatiszta",
-      phoneNumber: "061233344",
-      email: "matya.szobatiszta@gmail.com",
-      age: 10,
-      picture:
-        "https://vgl.ucdavis.edu/sites/g/files/dgvnsk8836/files/inline-images/Havanese-Health-Panel-600px.jpg",
-      linkToWebsite: "sddasdasdsaddasdasdasdasdasd",
-      tags: ["ez", "az"],
-    },
-    {
-      id: "2",
-      firstName: "Bosco",
-      lastName: "Boss",
-      phoneNumber: "061233344",
-      email: "bosco@gmail.com",
-      age: 10,
-      picture:
-        "https://www.scotsman.com/webimg/b25lY21zOjA2ZGUwMWI2LWQzZWUtNGE1NC1hZDVlLWY0MzFmMTYzMGMwYTowYmZkYTQyZi1jNTBjLTRkOTQtYWM4YS1lNjk3NTY0YzQwYjQ=.jpg?width=2048&enable=upscale",
-      linkToWebsite: "dsasdsa",
-      tags: ["ez", "az"],
-    },
-  ];
+  const ctx = useContext(ContactsContext);
+  const { updateContacts, contacts } = ctx;
+  const { sendRequest: fetchAllContactsData, isLoading } = useHttp();
 
-  return <ContactsList contacts={DUMMY_DATA} />;
+  useEffect(() => {
+    const transferData = (data: any) => {
+      let transormedData: Contact[] = [];
+      for (const e in data) {
+        const contact: Contact = {
+          ...data[e],
+          id: e,
+        };
+        transormedData.push(contact);
+      }
+      updateContacts(transormedData);
+    };
+
+    fetchAllContactsData({}, transferData);
+  }, [fetchAllContactsData, updateContacts]);
+
+  return <ContactsList isLoading={isLoading} contacts={contacts} />;
 };
 
 export default Contacts;

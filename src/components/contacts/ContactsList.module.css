@@ -1,9 +1,14 @@
 .list {
     color: var(--blue);
     padding: 0;
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-around; */
+}
+
+.button {
+    
+    align-content: left;
 }
 

@@ -3,10 +3,13 @@ import "./colors.css";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import ContactsProvider from "./store/ContactsProvider";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <ContactsProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ContactsProvider>,
   document.getElementById("root")
 );

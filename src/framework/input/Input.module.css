@@ -1,0 +1,26 @@
+.root {
+    padding: 8px 16px;
+    border: 1px solid var(--gray);
+    border-radius: 2px;
+    font-size: 14px;
+    outline: none;
+}
+
+.root:focus {
+    border-color: var(--blue);
+}
+
+.input,
+.textarea {
+    font: inherit;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--light-gray);
+    width: 95%;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--blue);
+    background-color: var(--light-blue);
+}

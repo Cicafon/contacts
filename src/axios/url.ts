@@ -1,0 +1,1 @@
+export const url = `${process.env.REACT_APP_FIREBASE_DOMAIN}/contacts.json`

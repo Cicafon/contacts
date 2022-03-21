@@ -1,0 +1,17 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper img {
+    max-height: 30rem;
+    margin: 1rem;
+}
+
+.column {
+    margin: 0 0 1rem 2rem;
+    width: 60%;
+    text-align: left;
+}
+
+

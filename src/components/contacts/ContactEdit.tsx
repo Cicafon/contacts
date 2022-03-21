@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import Button from "../../framework/button/Button";
-import Card from "../../framework/card/Card";
 import Input from "../../framework/input/Input";
 import Labelled from "../../framework/label/Labelled";
 import { Contact, FilledNewContact } from "../../models";
@@ -14,7 +13,7 @@ const ContactEdit: React.FC<{
   const ctx = useContext(ContactsContext);
   const [values, setValues] = useState<any>(ctx.selectedContact);
 
-  const [tags, setTags] = useState([]);
+  //const [tags, setTags] = useState([]);
 
   const handleChange = (
     e:
@@ -37,7 +36,7 @@ const ContactEdit: React.FC<{
     <>
       <h1>Create New Contact</h1>
       <div className={classes.wrapper}>
-        {values.picture && <img src={values.picture || ""} />}
+        {values.picture && <img alt="profile-pic" src={values.picture || ""} />}
         <div className={classes.column}>
           <Labelled label="First Name">
             <Input

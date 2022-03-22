@@ -33,9 +33,9 @@ const ContactsProvider: React.FC<React.ReactNode> = (props) => {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [selectedContact, setSelectedContact] = useState({});
 
-  const selectContact = (data: Contact | {}) => {
+  const selectContact = useCallback((data: Contact | {}) => {
     setSelectedContact(data);
-  };
+  }, []);
 
   const addContactHandler = (data: Contact) => {
     contacts.push(data);

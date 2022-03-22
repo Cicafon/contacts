@@ -6,11 +6,11 @@ import ContactsContext from "../store/ContactsContext";
 
 const Contacts = () => {
   const ctx = useContext(ContactsContext);
-  const { updateContacts, contacts } = ctx;
+  const { updateContacts, contacts, selectContact } = ctx;
   const { sendRequest: fetchAllContactsData, isLoading } = useHttp();
 
   useEffect(() => {
-    ctx.selectContact({})
+    selectContact({})
     const transferData = (data: any) => {
       let transormedData: Contact[] = [];
       for (const e in data) {
@@ -24,7 +24,7 @@ const Contacts = () => {
     };
 
     fetchAllContactsData({}, transferData);
-  }, [fetchAllContactsData, updateContacts]);
+  }, [fetchAllContactsData, updateContacts, selectContact]);
 
   return <ContactsList isLoading={isLoading} contacts={contacts} />;
 };

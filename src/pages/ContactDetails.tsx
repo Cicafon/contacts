@@ -1,28 +1,35 @@
-import { useContext } from "react";
-import SelectedContactDetails from "../components/contacts/SelectedContactDetails";
+import { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import useHttp from "../axios/use-http";
+import SelectedContactDetails from "../components/contacts/details/SelectedContactDetails";
 import Card from "../framework/card/Card";
 import ContactsContext from "../store/ContactsContext";
 
-// const DUMMY_CONTACT = {
-//   firstName: "Suzy",
-//   lastName: "Szobatiszta",
-//   phoneNumber: "061233344",
-//   email: "suzy.szobatiszta@gmail.com",
-//   age: 10,
-//   picture:
-//     "https://ae01.alicdn.com/kf/HTB1ObgiaUzrK1RjSspmq6AOdFXat/5D-DIY-Diamond-Painting-white-poodle-dog-Diamond-Embroidery-Paint-with-Diamonds-Mosaic-Puzzels-diamond-art.jpg",
-//   linkToWebsite: "dfdsfsdfsdfdsfdsf",
-//   tags: ["ez", "az"],
-// };
-
 const ContactDetails = () => {
   const ctx = useContext(ContactsContext);
+  const params = useParams();
+  const { id } = params;
+  const { sendRequest: fetchContactDetails, isLoading, error } = useHttp();
+  const { selectContact, selectedContact: contact } = ctx;
+
+  useEffect(() => {
+    const transferData = (data: any) => {
+      if (typeof id === "string") {
+        selectContact({ ...data[id], id: id });
+      }
+    };
+    fetchContactDetails({ data: id }, transferData);
+  }, [fetchContactDetails, id, selectContact]);
+
+  if (!error && isLoading) return <p className="centered">Loading...</p>;
+  if (!contact.firstName)
+    return (
+      <p className="centered">{`Contact with id "${contact.id}" does not exists`}</p>
+    );
 
   return (
     <Card>
-      <SelectedContactDetails
-        contact={ctx.selectedContact}
-      />
+      <SelectedContactDetails contact={contact} />
     </Card>
   );
 };

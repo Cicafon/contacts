@@ -9,26 +9,37 @@ const useHttp = () => {
   const sendRequest = useCallback(async (requestConfig, applyData) => {
     setIsLoading(true);
     setError(null);
- 
+
     let response;
     try {
-      if (!requestConfig.method || requestConfig.method === "GET") {
-        response = await axios.get(`${url}/contacts.json`);
-      } else if (requestConfig.method === "POST") {
-        response = await axios.post((`${url}/contacts.json`), requestConfig.data || null);
-      } else if (requestConfig.method === "PUT") {
-        response = await axios.put((`${url}/contacts.json`), requestConfig.data || null);
+      switch (requestConfig.method) {
+        case "POST":
+          response = await axios.post(
+            `${url}/contacts.json`,
+            requestConfig.data || null
+          );
+          break;
+        case "PUT":
+          response = await axios.put(
+            `${url}/contacts/${requestConfig.itemId}.json`,
+            requestConfig.data || null
+          );
+          break;
+        case "DELETE":
+          response = await axios.delete(
+            `${url}/contacts/${requestConfig.itemId}.json`
+          );
+          break;
+        default:
+          response = await axios.get(`${url}/contacts.json`);
       }
-      else if (requestConfig.method === "DELETE") {
-        response = await axios.delete(`${url}/contacts/${requestConfig.data}.json`);
-      }
+
       setIsLoading(false);
       return applyData(response?.data);
     } catch (err: any) {
       setError(err || "Something went wrong!");
-      setIsLoading(false)
+      setIsLoading(false);
     }
-    
   }, []);
 
   return {

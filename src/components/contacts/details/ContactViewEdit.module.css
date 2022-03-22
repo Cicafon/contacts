@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons {
+  margin: 2rem 0 1rem 0;
+}
+
+.wrapper p {
+  margin-bottom: 1.75rem;
+}
+
+.wrapper img {
+  max-height: 30rem;
+  max-width: 30rem;
+  margin: 1rem 2rem 1rem 1rem;
+}
+
+.column {
+  width: 100%;
+  text-align: left;
+}
+
+@media (min-width: 950px) {
+  .column {
+    margin: 0 1rem 0 2rem;
+    width: 60%;
+  }
+}

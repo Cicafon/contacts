@@ -1,34 +1,31 @@
-import { useContext, useState } from "react";
-import Button from "../../framework/button/Button";
-import Input from "../../framework/input/Input";
-import Labelled from "../../framework/label/Labelled";
-import { Contact, FilledNewContact } from "../../models";
-import ContactsContext from "../../store/ContactsContext";
-import classes from "./ContactEdit.module.css";
-
-const placeholderPic =
-  "https://schorpong.sch.bme.hu/assets/profile-placeholder-2e53990739e8d7c819202401a1073fad921bb6eae576e023f79abbdf9ec6da0d.png";
+import { useState } from "react";
+import Button from "../../../framework/button/Button";
+import Input from "../../../framework/input/Input";
+import Labelled from "../../../framework/label/Labelled";
+import { Contact } from "../../../models";
+import { noImage } from "../../../helpers";
+import classes from "./ContactViewEdit.module.css";
 
 const ContactEdit: React.FC<{
   onCancel: (param: boolean) => void;
-  onSave: (contact: Contact | FilledNewContact) => void;
+  onSave: (contact: Contact) => void;
   onDelete?: (id: string) => void;
-}> = ({ onCancel, onSave, onDelete }) => {
-  const ctx = useContext(ContactsContext);
-  const [values, setValues] = useState<any>(ctx.selectedContact);
+  contact: Contact;
+}> = ({ onCancel, onSave, onDelete, contact }) => {
+  const [values, setValues] = useState<Contact>(contact);
 
   //const [tags, setTags] = useState([]);
+  //add change picture function
 
   let formIsValid: boolean =
-    values.firsName?.trim() !== "" &&
-    values.lastName?.trim() !== "" &&
-    values.email?.includes("@");
+    values.firstName?.trim() &&
+    values.lastName?.trim() &&
+    values.phoneNumber?.trim()  &&
+    values.email?.includes("@")
+      ? true
+      : false;
 
-  const handleChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues((prevState: any) => ({
       ...prevState,
       ...{ [e.target.name]: e.target.value },
@@ -37,7 +34,9 @@ const ContactEdit: React.FC<{
 
   const saveHandler = () => {
     if (!formIsValid) {
-      alert("First Name, Last Name and Email (with @) are mandatory");
+      alert(
+        "First Name, Last Name, Phone Number and Email (with @) are mandatory"
+      );
       return;
     }
     if (values.firstName && values.lastName) {
@@ -51,11 +50,10 @@ const ContactEdit: React.FC<{
       <div className={classes.wrapper}>
         {values.id && (
           <div>
-            <img alt="profile-pic" src={values.picture || placeholderPic} />
+            <img alt="profile-pic" src={values.picture || noImage} />
             <Button>Change picture</Button>
           </div>
         )}
-
         <div className={classes.column}>
           <Labelled label="First Name">
             <Input
@@ -71,7 +69,6 @@ const ContactEdit: React.FC<{
               onChange={handleChange}
             />
           </Labelled>
-
           <Labelled label="Email">
             <Input
               name="email"
@@ -79,7 +76,6 @@ const ContactEdit: React.FC<{
               onChange={handleChange}
             />
           </Labelled>
-
           <Labelled label="Age">
             <Input
               name="age"
@@ -107,7 +103,6 @@ const ContactEdit: React.FC<{
               />
             </Labelled>
           )}
-
           <Labelled label="Link to website">
             <Input
               name="linkToWebsite"
@@ -120,7 +115,7 @@ const ContactEdit: React.FC<{
           </Labelled>
         </div>
       </div>
-      <div>
+      <div className={classes.buttons}>
         <Button appearance="primary" onClick={saveHandler}>
           Save
         </Button>
@@ -130,7 +125,7 @@ const ContactEdit: React.FC<{
         {values.id && (
           <Button
             appearance="secondary"
-            onClick={onDelete && (() => onDelete(values.id))}
+            onClick={onDelete && (() => onDelete(values.id!))}
           >
             Delete
           </Button>

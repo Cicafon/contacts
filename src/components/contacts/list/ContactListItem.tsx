@@ -1,9 +1,10 @@
-import Card from "../../framework/card/Card";
+import Card from "../../../framework/card/Card";
 import classes from "./ContactListItem.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import Button from "../../framework/button/Button";
+import Button from "../../../framework/button/Button";
+import { noImage } from "../../../helpers";
 
 interface Props {
   picture: string | undefined;
@@ -25,7 +26,7 @@ const ContactListItem: React.FC<Props> = ({
   return (
     <Card>
       <div className={classes.box}>
-        <img alt={name} src={picture} />
+        <img alt={name} src={picture || noImage} />
         <h3>{name}</h3>
         <p>
           {phoneIcon} {phoneNumber}

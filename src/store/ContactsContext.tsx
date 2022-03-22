@@ -3,22 +3,16 @@ import { Contact } from "../models";
 
 type ContextType = {
   contacts: Contact[] | [];
-  selectedContact: Contact | {};
-  updateContacts: (contacts: Contact[]) => void; // remove this? not needed?
+  selectedContact: Contact;
+  loadContacts: (contacts: Contact[]) => void;
   selectContact: (contact: Contact | {}) => void;
-  add: (contact: Contact) => void;
-  save: (contact: Contact) => void;
-  delete: (id: string) => void;
 };
 
 const ContactsContext = React.createContext<ContextType>({
   contacts: [],
   selectedContact: {},
-  updateContacts: (contacts: Contact[]) => {},
+  loadContacts: (contacts: Contact[]) => {},
   selectContact: (contact: Contact | {}) => {},
-  add: (contact: Contact) => {},
-  save: (contact: Contact) => {},
-  delete: (id: string) => {},
 });
 
 export default ContactsContext;

@@ -1,0 +1,10 @@
+.container {
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.error {
+  color: red;
+}

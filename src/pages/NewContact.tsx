@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import useHttp from "../axios/use-http";
-import ContactEdit from "../components/contacts/ContactEdit";
+import ContactEdit from "../components/contacts/details/ContactEdit";
 import Card from "../framework/card/Card";
-import { FilledNewContact } from "../models";
+import { Contact } from "../models";
 
 const NewContact = () => {
   const { sendRequest } = useHttp();
@@ -11,7 +11,7 @@ const NewContact = () => {
     navigate("/contacts");
   };
 
-  const addNewContact = async (newContact: FilledNewContact) => {
+  const addNewContact = async (newContact: Contact) => {
     const resposne = await sendRequest(
       {
         method: "POST",
@@ -27,7 +27,11 @@ const NewContact = () => {
   };
   return (
     <Card>
-      <ContactEdit onSave={addNewContact} onCancel={navigateToContactsPage} />
+      <ContactEdit
+        onSave={addNewContact}
+        onCancel={navigateToContactsPage}
+        contact={{}}
+      />
     </Card>
   );
 };

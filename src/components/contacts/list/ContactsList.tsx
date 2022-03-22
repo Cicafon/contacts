@@ -1,15 +1,14 @@
-import { Contact } from "../../models";
+import { Contact } from "../../../models";
 import ContactListItem from "./ContactListItem";
 import classes from "./ContactsList.module.css";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import ContactsContext from "../../store/ContactsContext";
-import Button from "../../framework/button/Button";
+import ContactsContext from "../../../store/ContactsContext";
+import Button from "../../../framework/button/Button";
 
 const ContactsList: React.FC<{
   contacts: Contact[] | [];
-  isLoading: boolean;
-}> = ({ contacts, isLoading }) => {
+}> = ({ contacts }) => {
   const navigate = useNavigate();
   const ctx = useContext(ContactsContext);
 
@@ -18,14 +17,12 @@ const ContactsList: React.FC<{
     navigate(`/contacts/${contact.id}`);
   };
 
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
-
   return (
     <>
       <div className={classes.button}>
-        <Button onClick={() => navigate("/new-contact")}>+ Create New Contact</Button>
+        <Button onClick={() => navigate("/new-contact")}>
+          + Create New Contact
+        </Button>
       </div>
       <ul className={classes.list}>
         {!contacts.length && <p>No available contacts</p>}
@@ -36,7 +33,7 @@ const ContactsList: React.FC<{
               picture={contact.picture}
               name={`${contact.firstName} ${contact.lastName}`}
               phoneNumber={contact.phoneNumber}
-              email={contact.email}
+              email={contact.email || ""}
               showDetails={showDetails.bind(null, contact)}
             />
           ))}

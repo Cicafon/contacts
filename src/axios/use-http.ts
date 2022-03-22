@@ -13,16 +13,20 @@ const useHttp = () => {
     let response;
     try {
       if (!requestConfig.method || requestConfig.method === "GET") {
-        response = await axios.get(url);
+        response = await axios.get(`${url}/contacts.json`);
       } else if (requestConfig.method === "POST") {
-        response = await axios.post(url, requestConfig.data || null);
+        response = await axios.post((`${url}/contacts.json`), requestConfig.data || null);
       } else if (requestConfig.method === "PUT") {
-        response = await axios.put(url, requestConfig.data || null);
+        response = await axios.put((`${url}/contacts.json`), requestConfig.data || null);
+      }
+      else if (requestConfig.method === "DELETE") {
+        response = await axios.delete(`${url}/contacts/${requestConfig.data}.json`);
       }
       setIsLoading(false);
       return applyData(response?.data);
     } catch (err: any) {
       setError(err || "Something went wrong!");
+      setIsLoading(false)
     }
     
   }, []);

@@ -10,9 +10,11 @@ const ContactView: React.FC<{ toggleIsEditable: (param: boolean) => void }> = ({
   return (
     <>
       <p>view</p>
-      <Button appearance="primary" onClick={openHandler}>
-        Open
-      </Button>
+      <div>
+        <Button appearance="primary" onClick={openHandler}>
+          Open
+        </Button>
+      </div>
     </>
   );
 };

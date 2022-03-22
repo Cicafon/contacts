@@ -10,6 +10,7 @@ const Contacts = () => {
   const { sendRequest: fetchAllContactsData, isLoading } = useHttp();
 
   useEffect(() => {
+    ctx.selectContact({})
     const transferData = (data: any) => {
       let transormedData: Contact[] = [];
       for (const e in data) {

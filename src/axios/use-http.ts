@@ -4,7 +4,7 @@ import { url } from "./url";
 
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   const sendRequest = useCallback(async (requestConfig, applyData) => {
     setIsLoading(true);
@@ -36,8 +36,13 @@ const useHttp = () => {
 
       setIsLoading(false);
       return applyData(response?.data);
-    } catch (err: any) {
-      setError(err || "Something went wrong!");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Something went wrong!");
+      }
+
       setIsLoading(false);
     }
   }, []);

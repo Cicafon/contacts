@@ -57,10 +57,6 @@ const SelectedContactDetails: React.FC<{ contact: Contact }> = ({
     }
   };
 
-  if (!error && isLoading) return <h1>Loading</h1>;
-  if (!contact.firstName)
-    return <p>{`Contact with id "${contact.id}" does not exists`}</p>;
-
   return (
     <div className={classes.container}>
       {!isEditable && (

@@ -6,6 +6,11 @@ import { Contact } from "../../../models";
 import { noImage } from "../../../helpers";
 import classes from "./ContactViewEdit.module.css";
 
+//Remaining:
+//const [tags, setTags] = useState([]);
+//add change picture function
+//add modal to confirm the deletion
+
 const ContactEdit: React.FC<{
   onCancel: (param: boolean) => void;
   onSave: (contact: Contact) => void;
@@ -14,19 +19,16 @@ const ContactEdit: React.FC<{
 }> = ({ onCancel, onSave, onDelete, contact }) => {
   const [values, setValues] = useState<Contact>(contact);
 
-  //const [tags, setTags] = useState([]);
-  //add change picture function
-
   let formIsValid: boolean =
     values.firstName?.trim() &&
     values.lastName?.trim() &&
-    values.phoneNumber?.trim()  &&
+    values.phoneNumber?.trim() &&
     values.email?.includes("@")
       ? true
       : false;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValues((prevState: any) => ({
+    setValues((prevState: Contact) => ({
       ...prevState,
       ...{ [e.target.name]: e.target.value },
     }));

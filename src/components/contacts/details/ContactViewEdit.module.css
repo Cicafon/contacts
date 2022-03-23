@@ -1,10 +1,7 @@
 .wrapper {
   display: flex;
   justify-content: center;
-}
-
-.buttons {
-  margin: 2rem 0 1rem 0;
+  flex-direction: column;
 }
 
 .wrapper p {
@@ -12,9 +9,9 @@
 }
 
 .wrapper img {
-  max-height: 30rem;
-  max-width: 30rem;
-  margin: 1rem 2rem 1rem 1rem;
+  max-height: 18rem;
+  max-width: 18rem;
+  margin: 1rem;
 }
 
 .column {
@@ -22,7 +19,21 @@
   text-align: left;
 }
 
+.buttons {
+  margin: 2rem 0 1rem 0;
+}
+
 @media (min-width: 950px) {
+  .wrapper {
+    flex-direction: row;
+  }
+
+  .wrapper img {
+    max-height: 30rem;
+    max-width: 30rem;
+    margin: 1rem 2rem 1rem 1rem;
+  }
+
   .column {
     margin: 0 1rem 0 2rem;
     width: 60%;

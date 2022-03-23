@@ -57,6 +57,7 @@ const SelectedContactDetails: React.FC<{ contact: Contact }> = ({
     }
   };
 
+  if (!error && isLoading) return <p className="centered">Loading...</p>;
   return (
     <div className={classes.container}>
       {!isEditable && (

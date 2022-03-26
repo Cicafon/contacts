@@ -5,9 +5,9 @@ import Labelled from "../../../framework/label/Labelled";
 import { Contact } from "../../../models";
 import { noImage } from "../../../helpers";
 import classes from "./ContactViewEdit.module.css";
+import Tag from "./Tag";
 
 //Remaining:
-//const [tags, setTags] = useState([]);
 //add change picture function
 //add modal to confirm the deletion
 
@@ -18,6 +18,7 @@ const ContactEdit: React.FC<{
   contact: Contact;
 }> = ({ onCancel, onSave, onDelete, contact }) => {
   const [values, setValues] = useState<Contact>(contact);
+  const [tagInput, setTagInput] = useState("");
 
   let formIsValid: boolean =
     values.firstName?.trim() &&
@@ -34,10 +35,30 @@ const ContactEdit: React.FC<{
     }));
   };
 
+  const tagInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTagInput(e.target.value);
+  };
+
+  const addTag = () => {
+    if (values.tags?.includes(tagInput)) {
+      alert("Tags must be unique");
+      setTagInput("");
+      return;
+    }
+    const newTags = values.tags ? [...values.tags, tagInput] : [tagInput];
+    setValues((prevState: Contact) => ({ ...prevState, tags: newTags }));
+    setTagInput("");
+  };
+
+  const removeTag = (tag: string) => {
+    const newTags = values.tags?.filter((item) => item !== tag);
+    setValues((prevState: Contact) => ({ ...prevState, tags: newTags }));
+  };
+
   const saveHandler = () => {
     if (!formIsValid) {
       alert(
-        "First Name, Last Name, Phone Number and Email (with @) are mandatory"
+        "First Name, Last Name, Phone Number and Email (with @) are mandatory."
       );
       return;
     }
@@ -113,8 +134,20 @@ const ContactEdit: React.FC<{
             />
           </Labelled>
           <Labelled label="Tags">
-            <Input />
+            <div className={classes.row}>
+              <Input
+                name="tagInput"
+                value={tagInput || ""}
+                onChange={tagInputChange}
+              />
+              <Button onClick={addTag}>Add</Button>
+            </div>
           </Labelled>
+          <div className={classes.row}>
+            {values.tags?.map((tag, index) => (
+              <Tag tag={tag} key={index} onRemove={removeTag} deletable/>
+            ))}
+          </div>
         </div>
       </div>
       <div className={classes.buttons}>

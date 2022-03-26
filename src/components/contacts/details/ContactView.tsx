@@ -3,6 +3,7 @@ import Labelled from "../../../framework/label/Labelled";
 import { Contact } from "../../../models";
 import classes from "./ContactViewEdit.module.css";
 import { noImage } from "../../../helpers";
+import Tag from "./Tag";
 
 const ContactView: React.FC<{
   contact: Contact;
@@ -29,7 +30,12 @@ const ContactView: React.FC<{
             <p>{contact.linkToWebsite || "-"}</p>
           </Labelled>
           <Labelled bold label="Tags">
-            <p>{"-"}</p>
+            {!contact.tags || (contact.tags.length === 0 && <p>-</p>)}
+            <div className={classes.row}>
+              {contact.tags?.map((tag) => (
+                <Tag tag={tag} />
+              ))}
+            </div>
           </Labelled>
         </div>
       </div>

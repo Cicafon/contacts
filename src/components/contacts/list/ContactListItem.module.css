@@ -1,3 +1,7 @@
+.listitem {
+  list-style: none;
+}
+
 .box {
   display: grid;
   grid-template-columns: 1fr;

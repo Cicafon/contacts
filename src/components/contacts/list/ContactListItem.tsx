@@ -24,21 +24,23 @@ const ContactListItem: React.FC<Props> = ({
   const phoneIcon = <FontAwesomeIcon icon={faPhone} />;
   const mailIcon = <FontAwesomeIcon icon={faEnvelope} />;
   return (
-    <Card>
-      <div className={classes.box}>
-        <img alt={name} src={picture || noImage} />
-        <h3>{name}</h3>
-        <p>
-          {phoneIcon} {phoneNumber}
-        </p>
-        <a href={`mailto: ${email}`}>
-          {mailIcon} {email}
-        </a>
-        <Button appearance="primary" onClick={showDetails}>
-          View
-        </Button>
-      </div>
-    </Card>
+    <li className={classes.listitem}>
+      <Card>
+        <div className={classes.box}>
+          <img alt={name} src={picture || noImage} />
+          <h3>{name}</h3>
+          <p>
+            {phoneIcon} {phoneNumber}
+          </p>
+          <a href={`mailto: ${email}`}>
+            {mailIcon} {email}
+          </a>
+          <Button appearance="primary" onClick={showDetails}>
+            View
+          </Button>
+        </div>
+      </Card>
+    </li>
   );
 };
 

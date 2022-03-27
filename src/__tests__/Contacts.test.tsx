@@ -22,7 +22,7 @@ jest.mock("react-router-dom", () => ({
 
 const server = setupServer(
   rest.get<DefaultRequestBody, any>(`${url}/contacts.json`, (req, res, ctx) => {
-    return res(ctx.delay(100), ctx.json(mockContactsFirebase));
+    return res( ctx.json(mockContactsFirebase));
   })
 );
 
@@ -40,12 +40,12 @@ describe("Contacts with Successfully loaded contacts", () => {
       screen.getByText("Loading...", { exact: false })
     );
   });
-  it("renders contacts name", async () => {
-    const list = await screen.findByText("Matya Szobatiszta", { exact: false });
+  it("renders contacts name", () => {
+    const list = screen.getByText("Matya Szobatiszta", { exact: false });
     expect(list).toBeInTheDocument();
   });
-  it("renders email", async () => {
-    const name = await screen.findByText("matya.szobatiszta@gmail.com", {
+  it("renders email", () => {
+    const name = screen.getByText("matya.szobatiszta@gmail.com", {
       exact: false,
     });
     expect(name).toBeInTheDocument();
@@ -60,17 +60,15 @@ describe("Contacts without contacts data", () => {
       screen.getByText("Loading...", { exact: false })
     );
   });
-  it("list items are not rendered when there are no contacts", async () => {
-    render(<Contacts />);
-    const list = await screen.findByRole("list");
+  it("list items are not rendered when there are no contacts", () => {
+   
+    const list = screen.getByRole("list");
     const { queryAllByRole } = within(list);
     const items = queryAllByRole("listitem");
     expect(items.length).toBe(0);
   });
-  it("renders No availabe contacts text when there are no contacts", async () => {
-    render(<Contacts />);
-    await waitFor(() =>
-      expect(screen.getByText("No available contacts")).toBeInTheDocument()
-    );
+  it("renders No availabe contacts text when there are no contacts", () => {
+  
+    expect(screen.getByText("No available contacts")).toBeInTheDocument();
   });
 });

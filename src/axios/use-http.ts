@@ -39,7 +39,6 @@ const useHttp = () => {
       }
 
       setIsLoading(false);
-
       return applyData(response?.data);
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -47,7 +46,6 @@ const useHttp = () => {
       } else {
         setError("Something went wrong!");
       }
-
       setIsLoading(false);
     }
   }, []);

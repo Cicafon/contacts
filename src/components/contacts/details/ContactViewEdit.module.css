@@ -8,10 +8,22 @@
   margin-bottom: 1.75rem;
 }
 
+.pictureSection {
+  margin: 1rem 2rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .wrapper img {
   max-height: 18rem;
   max-width: 18rem;
   margin: 1rem;
+}
+
+.pictureSection input {
+  margin: 0 1rem;
+  width: -webkit-fill-available;
 }
 
 .column {
@@ -28,6 +40,17 @@
   margin: 2rem 0 1rem 0;
 }
 
+.newPictureButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.newPictureButtons button {
+  margin-top: 1rem;
+}
+
 @media (min-width: 950px) {
   .wrapper {
     flex-direction: row;
@@ -36,11 +59,14 @@
   .wrapper img {
     max-height: 30rem;
     max-width: 30rem;
-    margin: 1rem 2rem 1rem 1rem;
   }
 
   .column {
     margin: 0 1rem 0 2rem;
     width: 60%;
+  }
+
+  .newPictureButtons {
+    flex-direction: row;
   }
 }

@@ -1,0 +1,14 @@
+.warning {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.warning .message {
+  margin: 2rem;
+}
+
+.warning button {
+  width: 10rem;
+}

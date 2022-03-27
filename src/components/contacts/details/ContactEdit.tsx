@@ -6,10 +6,7 @@ import { Contact } from "../../../models";
 import { noImage } from "../../../helpers/helpers";
 import classes from "./ContactViewEdit.module.css";
 import Tag from "./Tag";
-
-//Remaining:
-//add change picture function
-//add modal to confirm the deletion
+import WarningModal from "./WarningModal";
 
 const ContactEdit: React.FC<{
   onCancel: (param: boolean) => void;
@@ -19,6 +16,9 @@ const ContactEdit: React.FC<{
 }> = ({ onCancel, onSave, onDelete, contact }) => {
   const [values, setValues] = useState<Contact>(contact);
   const [tagInput, setTagInput] = useState("");
+  const [pictureEdit, setPictureEdit] = useState(false);
+  const [newPicture, setNewPicture] = useState(values.picture);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   let formIsValid: boolean =
     values.firstName?.trim() &&
@@ -55,6 +55,11 @@ const ContactEdit: React.FC<{
     setValues((prevState: Contact) => ({ ...prevState, tags: newTags }));
   };
 
+  const updatePicture = () => {
+    setPictureEdit(false);
+    setValues((prevState: Contact) => ({ ...prevState, picture: newPicture }));
+  };
+
   const saveHandler = () => {
     if (!formIsValid) {
       alert(
@@ -72,9 +77,35 @@ const ContactEdit: React.FC<{
       <h1>{values.id ? "Edit Contact" : "Create New Contact"}</h1>
       <div className={classes.wrapper}>
         {values.id && (
-          <div>
+          <div className={classes.pictureSection}>
             <img alt="profile-pic" src={values.picture || noImage} />
-            <Button>Change picture</Button>
+            {pictureEdit ? (
+              <>
+                <Input
+                  name="newPicture"
+                  value={newPicture}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setNewPicture(e.target.value)
+                  }
+                />
+                <div className={classes.newPictureButtons}>
+                  <Button onClick={updatePicture}>Update</Button>
+                  <Button
+                    appearance="secondary"
+                    onClick={() => {
+                      setPictureEdit(false);
+                      setNewPicture(values.picture);
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <Button onClick={() => setPictureEdit(true)}>
+                Change picture
+              </Button>
+            )}
           </div>
         )}
         <div className={classes.column}>
@@ -158,12 +189,17 @@ const ContactEdit: React.FC<{
           Cancel
         </Button>
         {values.id && (
-          <Button
-            appearance="secondary"
-            onClick={onDelete && (() => onDelete(values.id!))}
-          >
+          <Button appearance="secondary" onClick={() => setIsModalOpen(true)}>
             Delete
           </Button>
+        )}
+        {isModalOpen && (
+          <WarningModal
+            title="Delete contact"
+            onOk={() => onDelete!(values.id!)}
+            onClose={() => setIsModalOpen(false)}
+            message={`"Are you sure to delete this contact?"`}
+          />
         )}
       </div>
     </>

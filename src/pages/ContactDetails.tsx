@@ -15,10 +15,10 @@ const ContactDetails = () => {
   useEffect(() => {
     const transferData = (data: any) => {
       if (typeof id === "string") {
-        selectContact({ ...data[id], id: id });
+        selectContact({ ...data, id: id });
       }
     };
-    fetchContactDetails({ data: id }, transferData);
+    fetchContactDetails({ itemId: id }, transferData);
   }, [fetchContactDetails, id, selectContact]);
 
   if (!error && isLoading) return <p className="centered">Loading...</p>;

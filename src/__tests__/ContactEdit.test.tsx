@@ -2,24 +2,14 @@ import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { fireEvent, render, screen } from "@testing-library/react";
 import ContactEdit from "../components/contacts/details/ContactEdit";
+import { mockContactFull } from "../helpers/__mocks__/dummy_data";
 
 describe("ContactEdit", () => {
   const props = {
     onCancel: () => null,
     onSave: () => null,
     onDelete: () => null,
-    contact: {
-      id: "1",
-      firstName: "Matya",
-      lastName: "Szobatiszta",
-      phoneNumber: "061233344",
-      email: "matya.szobatiszta@gmail.com",
-      age: 10,
-      picture:
-        "https://vgl.ucdavis.edu/sites/g/files/dgvnsk8836/files/inline-images/Havanese-Health-Panel-600px.jpg",
-      linkToWebsite: "sddasdasdsaddasdasdasdasdasd",
-      tags: ["ez", "az"],
-    },
+    contact: mockContactFull,
   };
   it("renders ContactEdit Component", () => {
     render(<ContactEdit {...props} />);

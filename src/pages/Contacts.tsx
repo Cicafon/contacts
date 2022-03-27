@@ -20,6 +20,7 @@ const Contacts = () => {
         };
         transormedData.push(contact);
       }
+      
       loadContacts(transormedData);
     };
 

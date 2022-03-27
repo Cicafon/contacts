@@ -2,7 +2,7 @@ import Button from "../../../framework/button/Button";
 import Labelled from "../../../framework/label/Labelled";
 import { Contact } from "../../../models";
 import classes from "./ContactViewEdit.module.css";
-import { noImage } from "../../../helpers";
+import { noImage } from "../../../helpers/helpers";
 import Tag from "./Tag";
 
 const ContactView: React.FC<{
@@ -33,7 +33,7 @@ const ContactView: React.FC<{
             {!contact.tags || (contact.tags.length === 0 && <p>-</p>)}
             <div className={classes.row}>
               {contact.tags?.map((tag) => (
-                <Tag tag={tag} />
+                <Tag tag={tag} key={tag} />
               ))}
             </div>
           </Labelled>

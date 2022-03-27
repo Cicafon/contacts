@@ -11,7 +11,7 @@ const ContactsList: React.FC<{
 }> = ({ contacts }) => {
   const navigate = useNavigate();
   const ctx = useContext(ContactsContext);
-
+  
   const showDetails = (contact: Contact) => {
     ctx.selectContact(contact);
     navigate(`/contacts/${contact.id}`);

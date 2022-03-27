@@ -31,10 +31,15 @@ const useHttp = () => {
           );
           break;
         default:
-          response = await axios.get(`${url}/contacts.json`);
+          requestConfig.itemId
+            ? (response = await axios.get(
+                `${url}/contacts/${requestConfig.itemId}.json`
+              ))
+            : (response = await axios.get(`${url}/contacts.json`));
       }
 
       setIsLoading(false);
+
       return applyData(response?.data);
     } catch (err: unknown) {
       if (err instanceof Error) {

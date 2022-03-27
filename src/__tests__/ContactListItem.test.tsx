@@ -5,13 +5,14 @@ import ContactListItem from "../components/contacts/list/ContactListItem";
 
 describe("ContactListItem", () => {
   const props = {
-    picture: "https://vgl.ucdavis.edu/sites/g/files/dgvnsk8836/files/inline-images/Havanese-Health-Panel-600px.jpg",
+    picture:
+      "https://vgl.ucdavis.edu/sites/g/files/dgvnsk8836/files/inline-images/Havanese-Health-Panel-600px.jpg",
     name: "Test Name",
     phoneNumber: "012334534",
     email: "test@tets.com",
-    showDetails: () => null
+    showDetails: () => null,
   };
-  it("renders ContactListItem Component", () => {
+  it("renders ContactListItem component", () => {
     render(<ContactListItem {...props} />);
   });
   it("renders picture", () => {

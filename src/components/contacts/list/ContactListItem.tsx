@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../../framework/button/Button";
-import { noImage } from "../../../helpers";
+import { noImage } from "../../../helpers/helpers";
 
 interface Props {
   picture: string | undefined;

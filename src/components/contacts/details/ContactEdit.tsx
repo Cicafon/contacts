@@ -3,7 +3,7 @@ import Button from "../../../framework/button/Button";
 import Input from "../../../framework/input/Input";
 import Labelled from "../../../framework/label/Labelled";
 import { Contact } from "../../../models";
-import { noImage } from "../../../helpers";
+import { noImage } from "../../../helpers/helpers";
 import classes from "./ContactViewEdit.module.css";
 import Tag from "./Tag";
 
@@ -145,7 +145,7 @@ const ContactEdit: React.FC<{
           </Labelled>
           <div className={classes.row}>
             {values.tags?.map((tag, index) => (
-              <Tag tag={tag} key={index} onRemove={removeTag} deletable/>
+              <Tag tag={tag} key={tag} onRemove={removeTag} deletable />
             ))}
           </div>
         </div>

@@ -2,22 +2,12 @@ import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import ContactView from "../components/contacts/details/ContactView";
+import { mockContactFull } from "../helpers/__mocks__/dummy_data";
 
 describe("ContactView", () => {
   const props = {
     onOpen: () => null,
-    contact: {
-      id: "1",
-      firstName: "Matya",
-      lastName: "Szobatiszta",
-      phoneNumber: "061233344",
-      email: "matya.szobatiszta@gmail.com",
-      age: 10,
-      picture:
-        "https://vgl.ucdavis.edu/sites/g/files/dgvnsk8836/files/inline-images/Havanese-Health-Panel-600px.jpg",
-      linkToWebsite: "sddasdasdsaddasdasdasdasdasd",
-      tags: ["ez", "az"],
-    },
+    contact: mockContactFull,
   };
   it("renders ContactView Component", () => {
     render(<ContactView {...props} />);

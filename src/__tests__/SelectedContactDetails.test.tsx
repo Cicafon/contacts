@@ -13,23 +13,20 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("SelectedContactDetails", () => {
-  it("renders SelectedContactDetails Component", () => {
+  beforeEach(() => {
     render(<SelectedContactDetails contact={mockContactFull} />);
   });
   it("View mode in default and renders Open button", () => {
-    render(<SelectedContactDetails contact={mockContactFull} />);
     const openButton = screen.getByText("Open");
     expect(openButton).toBeInTheDocument();
   });
   it("Change to edit mode and rendering the Edit Contact title", () => {
-    render(<SelectedContactDetails contact={mockContactFull} />);
     const openButton = screen.getByText("Open");
     userEvent.click(openButton);
     const editTitle = screen.getByText("Edit Contact", { exact: false });
     expect(editTitle).toBeInTheDocument();
   });
   it("Change to edit mode then click to Cancel and being in View mode again", () => {
-    render(<SelectedContactDetails contact={mockContactFull} />);
     const openButton = screen.getByText("Open");
     userEvent.click(openButton);
     const cancelButton = screen.getByText("Cancel");
@@ -38,7 +35,6 @@ describe("SelectedContactDetails", () => {
     expect(editTitle).not.toBeInTheDocument();
   });
   it("Change to edit mode and change the name of the contact", () => {
-    render(<SelectedContactDetails contact={mockContactFull} />);
     const openButton = screen.getByText("Open");
     userEvent.click(openButton);
     const firstName: HTMLInputElement = screen.getByDisplayValue(

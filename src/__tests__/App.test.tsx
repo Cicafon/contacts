@@ -4,7 +4,7 @@ import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 
 describe("App", () => {
-  test("renders App component", () => {
+  beforeEach(() => {
     const history = createMemoryHistory();
     render(
       <Router location={""} navigator={history}>
@@ -13,12 +13,6 @@ describe("App", () => {
     );
   });
   test("renders Navigation logo text", () => {
-    const history = createMemoryHistory();
-    render(
-      <Router location={""} navigator={history}>
-        <App />
-      </Router>
-    );
     const logoText = screen.getByText("MyContacts");
     expect(logoText).toBeInTheDocument();
   });

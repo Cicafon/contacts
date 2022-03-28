@@ -10,26 +10,22 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("NewContact", () => {
-  it("renders NewContact Component", () => {
+  beforeEach(() => {
     render(<NewContact />);
   });
   it("renders Create New Contact title", () => {
-    render(<NewContact />);
     const title = screen.getByText("New Contact", { exact: false });
     expect(title).toBeInTheDocument();
   });
   it("renders Save button", () => {
-    render(<NewContact />);
     const button = screen.getByText("Save");
     expect(button).toBeInTheDocument();
   });
   it("renders Cancel button", () => {
-    render(<NewContact />);
     const button = screen.getByText("Cancel");
     expect(button).toBeInTheDocument();
   });
   it("not to render Delete button", () => {
-    render(<NewContact />);
     const button = screen.queryByText("Delete");
     expect(button).not.toBeInTheDocument();
   });

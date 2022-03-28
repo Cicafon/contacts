@@ -22,6 +22,7 @@ const ContactDetails = () => {
   }, [fetchContactDetails, id, selectContact]);
 
   if (!error && isLoading) return <p className="centered">Loading...</p>;
+  if (error) return <p className="centered">Oop, cannot load the contacts.</p>;
   if (!contact.firstName)
     return (
       <p className="centered">{`Contact with id "${contact.id}" does not exists`}</p>

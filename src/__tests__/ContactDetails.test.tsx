@@ -10,7 +10,7 @@ import { DefaultRequestBody, rest } from "msw";
 import { url } from "../axios/url";
 import ContactDetails from "../pages/ContactDetails";
 import ContactsProvider from "../store/ContactsProvider";
-import {mockContactFirebase} from "../helpers/__mocks__/dummy_data"
+import { mockContactFirebase } from "../helpers/__mocks__/dummy_data";
 
 const mockedUsedNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
@@ -25,16 +25,14 @@ const server = setupServer(
   rest.get<DefaultRequestBody, any>(
     `${url}/contacts/1.json`,
     (req, res, ctx) => {
-      return res(
-        ctx.delay(100),
-        ctx.json(mockContactFirebase)
-      );
+      return res(ctx.delay(100), ctx.json(mockContactFirebase));
     }
   )
 );
 
 beforeAll(() => server.listen());
 afterAll(() => server.close());
+afterEach(() => server.resetHandlers());
 
 describe("ContactDetails", () => {
   beforeEach(async () => {
@@ -47,7 +45,6 @@ describe("ContactDetails", () => {
       screen.getByText("Loading...", { exact: false })
     );
   });
-
   it("renders contacts name", () => {
     const name = screen.getByText("Matya Szobatiszta", { exact: false });
     expect(name).toBeInTheDocument();

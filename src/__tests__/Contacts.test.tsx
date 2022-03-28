@@ -3,7 +3,6 @@ import "@testing-library/jest-dom/extend-expect";
 import {
   render,
   screen,
-  waitFor,
   waitForElementToBeRemoved,
   within,
 } from "@testing-library/react";
@@ -22,12 +21,13 @@ jest.mock("react-router-dom", () => ({
 
 const server = setupServer(
   rest.get<DefaultRequestBody, any>(`${url}/contacts.json`, (req, res, ctx) => {
-    return res( ctx.json(mockContactsFirebase));
+    return res(ctx.json(mockContactsFirebase));
   })
 );
 
 beforeAll(() => server.listen());
 afterAll(() => server.close());
+afterEach(() => server.resetHandlers());
 
 describe("Contacts with Successfully loaded contacts", () => {
   beforeEach(async () => {
@@ -61,14 +61,12 @@ describe("Contacts without contacts data", () => {
     );
   });
   it("list items are not rendered when there are no contacts", () => {
-   
     const list = screen.getByRole("list");
     const { queryAllByRole } = within(list);
     const items = queryAllByRole("listitem");
     expect(items.length).toBe(0);
   });
   it("renders No availabe contacts text when there are no contacts", () => {
-  
     expect(screen.getByText("No available contacts")).toBeInTheDocument();
   });
 });

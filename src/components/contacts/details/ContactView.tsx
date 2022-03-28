@@ -27,7 +27,7 @@ const ContactView: React.FC<{
             <p>{contact.phoneNumber || "-"}</p>
           </Labelled>
           <Labelled bold label="Link to website">
-            <p>{contact.linkToWebsite || "-"}</p>
+            <a href={contact.linkToWebsite} target="_blank">{contact.linkToWebsite || "-"}</a>
           </Labelled>
           <Labelled bold label="Tags">
             {!contact.tags || (contact.tags.length === 0 && <p>-</p>)}
